@@ -2,18 +2,18 @@
 
 namespace Spatie\DataTransferObject\Tests;
 
-use Spatie\DataTransferObject\Tests\Dummy\BasicDto;
-use Spatie\DataTransferObject\Tests\Dummy\ComplexDto;
-use Spatie\DataTransferObject\Tests\Dummy\ComplexDtoWithCastedAttributeHavingCast;
-use Spatie\DataTransferObject\Tests\Dummy\ComplexDtoWithNullableProperty;
-use Spatie\DataTransferObject\Tests\Dummy\WithDefaultValueDto;
+use Spatie\DataTransferObject\Tests\Dummy\BasicDtoDummy;
+use Spatie\DataTransferObject\Tests\Dummy\ComplexDtoDummy;
+use Spatie\DataTransferObject\Tests\Dummy\ComplexDtoWithCastedAttributeHavingCastDummy;
+use Spatie\DataTransferObject\Tests\Dummy\ComplexDtoWithNullablePropertyDummy;
+use Spatie\DataTransferObject\Tests\Dummy\WithDefaultValueDtoDummy;
 
 class DataTransferObjectTest extends TestCase
 {
     /** @test */
     public function array_of()
     {
-        $list = BasicDto::arrayOf([
+        $list = BasicDtoDummy::arrayOf([
             ['name' => 'a'],
             ['name' => 'b'],
         ]);
@@ -27,7 +27,7 @@ class DataTransferObjectTest extends TestCase
     /** @test */
     public function create_with_nested_dto()
     {
-        $dto = new ComplexDto([
+        $dto = new ComplexDtoDummy([
             'name' => 'a',
             'other' => [
                 'name' => 'b',
@@ -41,9 +41,9 @@ class DataTransferObjectTest extends TestCase
     /** @test */
     public function create_with_nested_dto_already_casted()
     {
-        $dto = new ComplexDto([
+        $dto = new ComplexDtoDummy([
             'name' => 'a',
-            'other' => new BasicDto([
+            'other' => new BasicDtoDummy([
                 'name' => 'b',
             ]),
         ]);
@@ -55,7 +55,7 @@ class DataTransferObjectTest extends TestCase
     /** @test */
     public function create_with_null_nullable_nested_dto()
     {
-        $dto = new ComplexDtoWithNullableProperty([
+        $dto = new ComplexDtoWithNullablePropertyDummy([
             'name' => 'a',
             'other' => null,
         ]);
@@ -67,7 +67,7 @@ class DataTransferObjectTest extends TestCase
     /** @test */
     public function create_with_nested_dto_having_cast()
     {
-        $dto = new ComplexDtoWithCastedAttributeHavingCast([
+        $dto = new ComplexDtoWithCastedAttributeHavingCastDummy([
             'name' => 'a',
             'other' => [
                 'name' => 'b',
@@ -92,7 +92,7 @@ class DataTransferObjectTest extends TestCase
             ],
         ];
 
-        $dto = new ComplexDto($array);
+        $dto = new ComplexDtoDummy($array);
 
         $all = $dto->all();
 
@@ -111,7 +111,7 @@ class DataTransferObjectTest extends TestCase
             ],
         ];
 
-        $dto = new ComplexDto($array);
+        $dto = new ComplexDtoDummy($array);
 
         $this->assertEquals($array, $dto->toArray());
     }
@@ -126,7 +126,7 @@ class DataTransferObjectTest extends TestCase
             ],
         ];
 
-        $dto = new ComplexDto($array);
+        $dto = new ComplexDtoDummy($array);
 
         $this->assertEquals(['name' => 'a'], $dto->only('name')->toArray());
     }
@@ -141,7 +141,7 @@ class DataTransferObjectTest extends TestCase
             ],
         ];
 
-        $dto = new ComplexDto($array);
+        $dto = new ComplexDtoDummy($array);
 
         $this->assertEquals(['other' => ['name' => 'b']], $dto->except('name')->toArray());
     }
@@ -149,7 +149,7 @@ class DataTransferObjectTest extends TestCase
     /** @test */
     public function create_with_default_value()
     {
-        $dto = new WithDefaultValueDto();
+        $dto = new WithDefaultValueDtoDummy();
 
         $this->assertEquals(['name' => 'John'], $dto->toArray());
     }
@@ -157,7 +157,7 @@ class DataTransferObjectTest extends TestCase
     /** @test */
     public function create_with_overriden_default_value()
     {
-        $dto = new WithDefaultValueDto(name: 'Doe');
+        $dto = new WithDefaultValueDtoDummy(name: 'Doe');
 
         $this->assertEquals(['name' => 'Doe'], $dto->toArray());
     }
@@ -172,7 +172,7 @@ class DataTransferObjectTest extends TestCase
             ],
         ];
 
-        $dto = new ComplexDto($array);
+        $dto = new ComplexDtoDummy($array);
 
         $clone = $dto->clone(other: ['name' => 'a']);
 

@@ -7,7 +7,7 @@ use Spatie\DataTransferObject\Validation\ValidationResult;
 use Spatie\DataTransferObject\Validator;
 
 #[Attribute(Attribute::TARGET_PROPERTY | Attribute::IS_REPEATABLE)]
-class NumberBetween implements Validator
+class NumberBetweenDummy implements Validator
 {
     public function __construct(
         private int $min,

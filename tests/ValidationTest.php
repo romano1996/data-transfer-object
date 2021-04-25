@@ -4,7 +4,7 @@ namespace Spatie\DataTransferObject\Tests;
 
 use Spatie\DataTransferObject\DataTransferObject;
 use Spatie\DataTransferObject\Exceptions\ValidationException;
-use Spatie\DataTransferObject\Tests\Dummy\NumberBetween;
+use Spatie\DataTransferObject\Tests\Dummy\NumberBetweenDummy;
 
 class ValidationTest extends TestCase
 {
@@ -12,7 +12,7 @@ class ValidationTest extends TestCase
     public function test_validation()
     {
         $dto = new class(foo: 50) extends DataTransferObject {
-            #[NumberBetween(1, 100)]
+            #[NumberBetweenDummy(1, 100)]
             public int $foo;
         };
 
@@ -21,7 +21,7 @@ class ValidationTest extends TestCase
         $this->expectException(ValidationException::class);
 
         new class(foo: 150) extends DataTransferObject {
-            #[NumberBetween(1, 100)]
+            #[NumberBetweenDummy(1, 100)]
             public int $foo;
         };
     }

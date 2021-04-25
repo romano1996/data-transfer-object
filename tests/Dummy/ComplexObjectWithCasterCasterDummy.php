@@ -4,16 +4,16 @@ namespace Spatie\DataTransferObject\Tests\Dummy;
 
 use Spatie\DataTransferObject\Caster;
 
-class ComplexObjectWithCasterCaster implements Caster
+class ComplexObjectWithCasterCasterDummy implements Caster
 {
     /**
      * @param array|mixed $value
      *
      * @return mixed
      */
-    public function cast(mixed $value): ComplexObjectWithCaster
+    public function cast(mixed $value): ComplexObjectWithCasterDummy
     {
-        return new ComplexObjectWithCaster(
+        return new ComplexObjectWithCasterDummy(
             name: $value['name']
         );
     }
